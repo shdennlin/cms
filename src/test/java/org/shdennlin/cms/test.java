@@ -2,7 +2,6 @@ package org.shdennlin.cms;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.shdennlin.cms.Product;
 
 import javax.annotation.PostConstruct;
 import java.util.*;
@@ -11,11 +10,11 @@ import java.util.*;
 public class test {
     @Test
     public void test1() {
-        TempController temp = new TempController();
+        System.out.println("test");
     }
 }
 
-
+/*
 class TempController {
     final List<Product> productDB = new ArrayList<>();
 
@@ -38,5 +37,5 @@ class TempController {
             System.out.println();
         }
     }
-
 }
+ */
