@@ -1,10 +1,7 @@
 package org.shdennlin.cms;
 
-import org.junit.jupiter.api.Test;
+import org.junit.Test;
 import org.springframework.boot.test.context.SpringBootTest;
-
-import javax.annotation.PostConstruct;
-import java.util.*;
 
 @SpringBootTest
 public class test {
@@ -14,28 +11,52 @@ public class test {
     }
 }
 
-/*
-class TempController {
-    final List<Product> productDB = new ArrayList<>();
+// ===============================================================================================
 
-    void initDB() {
-        productDB.add(new Product("B0001", "Android Development (Java)", 380));
-        productDB.add(new Product("B0002", "Android Development (Kotlin)", 420));
-        productDB.add(new Product("B0003", "Data Structure (Java)", 250));
-        productDB.add(new Product("B0004", "Finance Management", 450));
-        productDB.add(new Product("B0005", "Human Resource Management", 330));
+interface IRequest {
+    public void execute();
+}
+
+class HelloRequest implements IRequest {
+    private String name;
+
+    public HelloRequest(String name) {
+        this.name = name;
     }
 
-    TempController (){
-        initDB();
-        System.out.println("productDB = " + productDB);
-        for(int i = 0; i< productDB.size(); i++){
-            Product temp = productDB.get(i);
-            System.out.print("temp.id = " + temp.getId());
-            System.out.print("temp.name = " + temp.getPrice());
-            System.out.print("temp.price = " + temp.getName());
-            System.out.println();
-        }
+    public void execute() {
+        System.out.printf("Hello! %s!%n", name);
     }
 }
- */
+
+class WelcomeRequest implements IRequest {
+    private String place;
+
+    public WelcomeRequest(String place) {
+        this.place = place;
+    }
+
+    public void execute() {
+        System.out.printf("Welcome to %s!%n", place);
+    }
+}
+
+class temp {
+    public static void main(String[] args) {
+        for (int i = 0; i < 10; i++) {
+            int n = (int) (Math.random() * 10) % 2;
+            switch (n) {
+                case 0:
+                    doRequest(
+                            new HelloRequest("caterpillar"));
+                    break;
+                case 1:
+                    doRequest(new WelcomeRequest("PmWiki"));
+            }
+        }
+    }
+
+    public static void doRequest(IRequest request) {
+        request.execute();
+    }
+}

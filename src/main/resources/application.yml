@@ -1,0 +1,29 @@
+server:
+  port: 8000
+  servlet:
+    context-path: /api
+
+spring:
+  #  servlet:
+  #    multipart:
+  #      max-file-size: 150MB
+  #  main:
+  #    allow-bean-definition-overriding: true
+  #  data:
+  #    mongodb:
+  #      uri: mongodb://localhost:27017/nineder_backend
+  datasource:
+    url: jdbc:postgresql://localhost:5432/shdennlin_db_backend
+    username: postgres
+  jpa:
+    generate-ddl: true
+    open-in-view: true
+    properties:
+      hibernate:
+        #format_sql: true
+        show-sql: true
+        default_schema: public
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        ddl-auto: create-drop
+        jdbc:
+          time_zone: GMT+8
