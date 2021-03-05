@@ -27,63 +27,43 @@ public class AccountService {
     /**
      * Create Account
      *
-     * @param requestAccount
+     * @param request
      * @return
      */
-    public Account createAccount(Account requestAccount) {
+    public Account createAccount(Account request) {
         Account account = new Account();
-        account.setUsername(requestAccount.getUsername());
-        account.setPassword(requestAccount.getPassword());
+        account.setUsername(request.getUsername());
+        account.setPassword(request.getPassword());
+
+        return accountRepository.save(account);
+    }
+
+    /**
+     * Replace Account
+     *
+     * @param id
+     * @param request
+     * @return
+     */
+    public Account replaceAccount(Long id, Account request) {
+        Account oldAccount = getAccount(id);
+
+        Account account = new Account();
+        account.setId(oldAccount.getId());
+        account.setUsername(request.getUsername());
+        account.setPassword(request.getPassword());
 
         return accountRepository.save(account);
     }
 
 
     /**
-     * Update Account Info
+     * Delete Account
      *
      * @param accountId
-     * @param username
-     * @param password
-     * @return
      */
-/*
-    @Transactional(propagation = Propagation.REQUIRED, isolation = Isolation.SERIALIZABLE, readOnly = false)
-    public boolean updateAccount(Long accountId, String username, String password) {
-        if (accountId == null || StringUtils.isEmpty(username)) {
-            return false;
-        }
-
-        Account account = accountRepository.findById(accountId);
-        if (account == null) {
-            return false;
-        }
-
-        account.setUsername(username);
-        account.setPassword(password);
-        return accountRepository.save(account) != null;
+    public void deleteAccount(Long accountId) {
+        accountRepository.deleteById(accountId);
     }
-*/
-
-/**
- * Delete Account
- *
- * @param accountId
- * @return
- */
-/*
-    public boolean deleteAccount(Long accountId) {
-        if (accountId == null) {
-            return false;
-        }
-
-        Account account = accountRepository.findById(accountId);
-        if (account == null) {
-            return false;
-        }
-        accountRepository.delete(account);
-        return true;
-    }
-*/
 
 }

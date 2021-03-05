@@ -25,10 +25,10 @@ public class AccountController {
         return ResponseEntity.ok(account);
     }
 
-    @PostMapping
+    @PostMapping("")
     @ResponseStatus(HttpStatus.CREATED)
-    public ResponseEntity<Account> createAccount(@RequestBody Account requestAccount) {
-        Account account = accountService.createAccount(requestAccount);
+    public ResponseEntity<Account> createAccount(@RequestBody Account account) {
+        account = accountService.createAccount(account);
 
         URI location = ServletUriComponentsBuilder
                 .fromCurrentRequest()
@@ -37,6 +37,19 @@ public class AccountController {
                 .toUri();
 
         return ResponseEntity.created(location).body(account);
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<Account> replaceAccoutn(
+            @PathVariable("id") Long id, @RequestBody Account account) {
+        account = accountService.replaceAccount(id, account);
+        return ResponseEntity.ok(account);
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Account> deleteAccount(@PathVariable("id") Long id) {
+        accountService.deleteAccount(id);
+        return ResponseEntity.noContent().build();
     }
 
 }
