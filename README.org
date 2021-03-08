@@ -1,0 +1,13 @@
+* My CMS project
+
+* Introduce
+A simple project for CMS system.
+
+* System
+- postgresql
+- spring boot 2.3.4.RELEASE
+
+* function
+- basic CRUD
+- auto generate jwt to postgresql
+

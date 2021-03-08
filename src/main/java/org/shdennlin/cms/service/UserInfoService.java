@@ -66,4 +66,16 @@ public class UserInfoService {
         userInfoRepository.deleteById(userInfoId);
     }
 
+    public UserInfo updateUserinfoJWT(Long id, UserInfo request) {
+        UserInfo oldUserInfo = getUserInfo(id);
+
+        UserInfo userInfo = new UserInfo();
+        userInfo.setId(oldUserInfo.getId());
+        userInfo.setUsername(oldUserInfo.getUsername());
+        userInfo.setPassword(oldUserInfo.getPassword());
+        userInfo.setJwt(request.getJwt());
+
+        return userInfoRepository.save(userInfo);
+    }
+
 }
